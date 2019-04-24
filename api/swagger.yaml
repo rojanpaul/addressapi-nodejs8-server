@@ -1,0 +1,98 @@
+---
+swagger: "2.0"
+info:
+  description: "A brand new API with no content.  Go nuts!"
+  version: "1.0"
+  title: "AddressBook API"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /addresses:
+    get:
+      description: "Lists all addresses."
+      operationId: "addressesGET"
+      parameters: []
+      responses:
+        200:
+          description: "Get Addresss"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Address"
+      x-swagger-router-controller: "Default"
+    post:
+      description: "Adds an address."
+      operationId: "addressesPOST"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Address"
+      responses:
+        201:
+          description: "Created Address"
+          schema:
+            $ref: "#/definitions/Address"
+      x-swagger-router-controller: "Default"
+  /addresses/{addressId}:
+    get:
+      description: "Gets an address."
+      operationId: "addressesAddressIdGET"
+      parameters:
+      - name: "addressId"
+        in: "path"
+        description: "Address ID Desc"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "All addresses"
+      x-swagger-router-controller: "Default"
+    put:
+      description: "Updates an address."
+      operationId: "addressesAddressIdPUT"
+      parameters:
+      - name: "addressId"
+        in: "path"
+        description: "Address ID Desc"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Address"
+      responses:
+        200:
+          description: "Sucessfully updated"
+      x-swagger-router-controller: "Default"
+    delete:
+      description: "Deletes an address."
+      operationId: "addressesAddressIdDELETE"
+      parameters:
+      - name: "addressId"
+        in: "path"
+        description: "Address ID Desc"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Successfully deleted Address"
+      x-swagger-router-controller: "Default"
+definitions:
+  Address:
+    type: "object"
+    properties:
+      Id:
+        type: "string"
+      City:
+        type: "string"
+      State:
+        type: "string"
+    title: "Root Type for Address"
+    description: "Address Data Type Desc"
+    example: "{\n    \"Id\": \"12345\",\n    \"City\": \"Boston\",\n    \"State\"\
+      : \"MA\"\n}"
